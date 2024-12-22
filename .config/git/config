@@ -1,0 +1,23 @@
+[core]
+	editor = nvim
+
+[user]
+	name = alienus
+	email = mostafaahmedy04@gmail.com
+	signingkey = ~/.ssh/id_ed25519.pub
+
+[gpg]
+	format = ssh
+
+[commit]
+	gpgsign = true
+
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true

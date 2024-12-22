@@ -1,0 +1,5 @@
+#!/bin/sh
+
+HERE="$(dirname "$(readlink -f "$0")")"
+cp -srvft "$HOME" "$HERE/.config" "$HERE/.local"
+ln -svft "$HOME" "$HERE/.zprofile"

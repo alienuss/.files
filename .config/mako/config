@@ -1,0 +1,48 @@
+sort=-time
+layer=overlay
+default-timeout=5000
+#ignore-timeout=1
+font=monospace 14
+text-color=#eceff4
+background-color=#2e3440
+border-color=#5e81ac
+border-radius=10
+progress-color=over #5e81ac
+on-notify=exec play -q /usr/share/sounds/freedesktop/stereo/message.oga
+margin=20
+
+[hidden]
+format=(and %h more)
+text-color=#bbc3d4
+
+[urgency=high]
+background-color=#b74e58
+border-color=#bf616a
+
+[mode=dnd]
+invisible=1
+
+[app-name=poweralertd]
+on-notify=none
+
+[app-name=screenlightctl]
+on-notify=none
+
+[app-name=poweralertd category=power.online]
+on-notify=exec play -q /usr/share/sounds/freedesktop/stereo/power-plug.oga
+
+[app-name=poweralertd category=power.offline]
+on-notify=exec play -q /usr/share/sounds/freedesktop/stereo/power-unplug.oga
+
+[app-name=poweralertd category=power.low]
+on-notify=exec play -q "$XDG_DATA_HOME/sounds/low_battery.wav"
+
+[app-name=poweralertd category=power.critical]
+on-notify=exec play -q "$XDG_DATA_HOME/sounds/low_battery.wav"
+
+[app-name=wpa_supplicant category=network.connected]
+on-notify=exec play -q /usr/share/sounds/freedesktop/stereo/service-login.oga
+
+[app-name=wpa_supplicant category=network.disconnected]
+on-notify=exec play -q /usr/share/sounds/freedesktop/stereo/service-logout.oga
+

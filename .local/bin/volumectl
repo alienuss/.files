@@ -1,0 +1,34 @@
+#!/bin/sh
+
+getvol() {
+	vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+	[ -z "$vol" ] && return 1
+	[ "$vol" != "${vol%\[MUTED\]}" ] && echo "muted" && return 0
+	vol="${vol#Volume: }"
+	IFS="."
+	# shellcheck disable=SC2086
+	set -- ${vol#0}
+	printf "%s" "$@"
+}
+
+case "$1" in
+	""|get) getvol && echo "%"; exit $? ;;
+	toggle) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
+	*+|*-|*%)
+		wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+		wpctl set-volume @DEFAULT_AUDIO_SINK@ "$1"
+		;;
+	*) exit 1 ;;
+esac
+
+vol="$(getvol)" || exit 1
+[ "$vol" = "muted" ] && { vol=0; text="muted"; } || text="$vol%"
+notify-send \
+	-u low \
+	-t 1000 \
+	-a "$(basename "$0")" \
+	-h "int:value:$vol" \
+	-h "string:x-canonical-private-synchronous:volume" \
+	"volume" \
+	"$text"
+
