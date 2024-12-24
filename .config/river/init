@@ -57,7 +57,7 @@ done
 
 riverctl map normal Super Return spawn "$TERMINAL"
 riverctl map normal Super P spawn "dmenu_run"
-#riverctl map normal Super R spawn "fuzzel"
+riverctl map normal Super R spawn "fuzzel"
 #riverctl map normal Super Q spawn "menu-sysact"
 #riverctl map normal None Print spawn "menu-screenshot"
 #riverctl map normal Super I spawn "menu-handler"
